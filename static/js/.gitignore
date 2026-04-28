@@ -1,6 +1,6 @@
 venv/
 __pycache__/
-*.pyc
-chhaya.db
+*.db
 static/uploads/*
 .env
+.vscode/

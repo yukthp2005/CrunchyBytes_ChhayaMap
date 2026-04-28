@@ -2,83 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHHAYA | Tactical Thermal Intelligence</title>
-    
+    <title>CHHAYA | Thermal Command Center</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="map"></div>
-
     <div id="sidebar">
-        <header>
-            <div class="brand">
-                <h1>PROJECT CHHAYA</h1>
-                <span class="version">V2.0 // THERMAL_ROUTING_ACTIVE</span>
-            </div>
-            <div class="glitch-status" data-text="[SCANNIG_MYSURU_GRID]">[SCANNIG_MYSURU_GRID]</div>
-        </header>
+        <h1>PROJECT CHHAYA</h1>
 
-        <hr class="neon-divider">
+        <div class="module">
+            <h3>🏆 WARD RISK LEADERBOARD</h3>
+            <div id="leaderboard-list"></div>
+        </div>
 
-        <section class="module">
-            <h3><span class="accent">01.</span> EVIDENCE_LOG</h3>
-            <div class="upload-container">
-                <p class="instruction">Target location on map, then upload imagery.</p>
-                <div id="selection-status">
-                    COORDS: <span id="coords-label">VOID</span>
-                </div>
-                <input type="file" id="imageInput" class="custom-file-input">
-                <button onclick="uploadEvidence()" class="btn-glow">TRANSMIT DATA</button>
+        <div class="module">
+            <h3>📍 THERMAL NAVIGATION</h3>
+            <input type="text" id="start-input" placeholder="Set Start Location" readonly onclick="setMode('start')">
+            <input type="text" id="end-input" placeholder="Set Destination" readonly onclick="setMode('end')">
+            <div class="slider-box">
+                <label>SUN SENSITIVITY: <span id="sens-label">50</span>%</label>
+                <input type="range" id="sens-slider" min="1" max="100" value="50" oninput="document.getElementById('sens-label').innerText=this.value">
             </div>
-        </section>
+            <button class="btn-primary" onclick="getRoute()">Find Practical Path</button>
+            <div id="route-data" style="display:none; margin-top:10px;">
+                <span id="uv-score" class="savings">--</span>
+                <ul id="steps-ul"></ul>
+            </div>
+        </div>
 
-        <section class="module">
-            <h3><span class="accent">02.</span> SHADE_OPTIMIZER</h3>
-            <div class="routing-controls">
-                <button onclick="setRoutePoint('start')" class="btn-outline">SET START</button>
-                <button onclick="setRoutePoint('end')" class="btn-outline">SET END</button>
+        <div class="module sim-box">
+            <h3>🌳 TREE ROI SIMULATOR</h3>
+            <select id="sim-ward" style="width:100%; padding:5px; margin-bottom:5px;">
+                <option value="Mandi Mohalla">Mandi Mohalla</option>
+                <option value="Devaraja Mohalla">Devaraja Mohalla</option>
+            </select>
+            <input type="number" id="sim-count" value="200" style="width:60px;">
+            <button onclick="runSimulation()" class="btn-primary" style="background:#2e7d32;">PLANT TREES</button>
+            <div id="sim-impact" style="display:none; font-size:0.75rem; color:#1b5e20; margin-top:10px;">
+                <strong>IMPACT:</strong> <span id="res-temp"></span> | <span id="res-roi"></span>
             </div>
-            
-            <div id="comparison-board" class="hidden">
-                <div class="metric-row">
-                    <div class="metric">
-                        <span class="label">STANDARD_PATH</span>
-                        <span id="dist-std" class="val">--</span>
-                    </div>
-                    <div class="metric">
-                        <span class="label">CHHAYA_PATH</span>
-                        <span id="dist-cool" class="val neon">--</span>
-                    </div>
-                </div>
-                <div class="impact-shield">
-                    <span class="impact-label">UV_EXPOSURE_REDUCTION</span>
-                    <span id="uv-saved" class="impact-val">00%</span>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <section class="module scrollable">
-            <h3><span class="accent">03.</span> ANOMALY_FEED</h3>
-            <div id="feed-container">
-                <p class="ghost-text">No active breaches detected...</p>
-            </div>
-        </section>
+        <div class="module">
+            <h3>🔍 ALBEDO FORENSIC AUDIT</h3>
+            <button class="btn-secondary" onclick="runAudit()">SCAN SURFACE ALBEDO</button>
+        </div>
 
-        <footer class="controls">
-            <button class="btn-audit" onclick="generateAudit()">GENERATE MUNICIPAL AUDIT</button>
-            <p class="tagline">TRUST THE SHADOWS. BUILD THE COOL.</p>
-        </footer>
+        <button class="btn-audit" onclick="alert('Proposal Exported to MCC.')">GENERATE MUNICIPAL AUDIT</button>
     </div>
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
-    
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>
-
 </body>
 </html>

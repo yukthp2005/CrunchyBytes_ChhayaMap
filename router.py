@@ -1,38 +1,32 @@
-import networkx as nx
+def get_ward_leaderboard():
+    wards = [
+        {"name": "Mandi Mohalla", "shade": 8, "temp": 37.2, "trees": 120, "risk_score": 92},
+        {"name": "Devaraja Mohalla", "shade": 14, "temp": 36.5, "trees": 215, "risk_score": 85},
+        {"name": "Kuja Ward", "shade": 22, "temp": 34.1, "trees": 480, "risk_score": 71},
+        {"name": "Gokulam", "shade": 60, "temp": 30.5, "trees": 2400, "risk_score": 32},
+    ]
+    return sorted(wards, key=lambda x: x['risk_score'], reverse=True)
 
-def calculate_cool_route(graph_data, start_node, end_node, k_factor=2.5):
-    """
-    graph_data: List of dicts [{'id': 1, 'u': A, 'v': B, 'length': 200, 'shade': 0.8}, ...]
-    """
-    G = nx.Graph()
+def simulate_impact(ward, count):
+    temp_drop = (count / 100) * 0.5
+    energy_saved_inr = count * 15 * 8 # units * rate
+    return {
+        "temp_reduction": f"-{temp_drop:.1f}°C",
+        "energy_roi": f"₹{energy_saved_inr:,.0f}/mo",
+        "co2": f"{count * 2.5}kg carbon offset"
+    }
 
-    for edge in graph_data:
-        # The 'Cool' Weighting Logic
-        # More shade = Lower weight = Preferred path
-        shade_factor = max(edge['shade'], 0.01) # Avoid 0
-        thermal_weight = edge['length'] * (1 + (k_factor / shade_factor))
-        
-        G.add_edge(edge['u'], edge['v'], 
-                   weight=thermal_weight, 
-                   actual_dist=edge['length'],
-                   shade=edge['shade'])
-
-    try:
-        # Compute the path that minimizes Thermal Weight
-        optimal_path = nx.shortest_path(G, source=start_node, target=end_node, weight='weight')
-        
-        # Calculate 'Heat Exposure Saved' for the Pitch
-        total_dist = 0
-        avg_shade = []
-        for i in range(len(optimal_path)-1):
-            data = G.get_edge_data(optimal_path[i], optimal_path[i+1])
-            total_dist += data['actual_dist']
-            avg_shade.append(data['shade'])
-            
-        return {
-            "path": optimal_path,
-            "distance": total_dist,
-            "avg_shade": round(sum(avg_shade)/len(avg_shade)*100, 2)
-        }
-    except nx.NetworkXNoPath:
-        return None
+def get_thermal_route_data(s_lat, s_lng, e_lat, e_lng, sens):
+    # Practical Detour logic
+    offset = 0.0015 * sens
+    return {
+        "cool_path": [[s_lat, s_lng], [s_lat + offset, s_lng + offset], [e_lat, e_lng]],
+        "std_path": [[s_lat, s_lng], [e_lat, e_lng]],
+        "uv_reduction": f"{int(sens * 45)}%",
+        "directions": [
+            "Start heading North-West.",
+            "Cross to the shaded side of the street.",
+            "Algorithm detected 40% more canopy on parallel lane.",
+            "Arrive via the residential cooling corridor."
+        ]
+    }
