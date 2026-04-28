@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHHAYA | Tactical Thermal Intelligence</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <div id="sidebar">
+        <header>
+            <div class="brand">
+                <h1>PROJECT CHHAYA</h1>
+                <span class="version">V2.0 // THERMAL_ROUTING_ACTIVE</span>
+            </div>
+            <div class="glitch-status" data-text="[SCANNIG_MYSURU_GRID]">[SCANNIG_MYSURU_GRID]</div>
+        </header>
+
+        <hr class="neon-divider">
+
+        <section class="module">
+            <h3><span class="accent">01.</span> EVIDENCE_LOG</h3>
+            <div class="upload-container">
+                <p class="instruction">Target location on map, then upload imagery.</p>
+                <div id="selection-status">
+                    COORDS: <span id="coords-label">VOID</span>
+                </div>
+                <input type="file" id="imageInput" class="custom-file-input">
+                <button onclick="uploadEvidence()" class="btn-glow">TRANSMIT DATA</button>
+            </div>
+        </section>
+
+        <section class="module">
+            <h3><span class="accent">02.</span> SHADE_OPTIMIZER</h3>
+            <div class="routing-controls">
+                <button onclick="setRoutePoint('start')" class="btn-outline">SET START</button>
+                <button onclick="setRoutePoint('end')" class="btn-outline">SET END</button>
+            </div>
+            
+            <div id="comparison-board" class="hidden">
+                <div class="metric-row">
+                    <div class="metric">
+                        <span class="label">STANDARD_PATH</span>
+                        <span id="dist-std" class="val">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">CHHAYA_PATH</span>
+                        <span id="dist-cool" class="val neon">--</span>
+                    </div>
+                </div>
+                <div class="impact-shield">
+                    <span class="impact-label">UV_EXPOSURE_REDUCTION</span>
+                    <span id="uv-saved" class="impact-val">00%</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="module scrollable">
+            <h3><span class="accent">03.</span> ANOMALY_FEED</h3>
+            <div id="feed-container">
+                <p class="ghost-text">No active breaches detected...</p>
+            </div>
+        </section>
+
+        <footer class="controls">
+            <button class="btn-audit" onclick="generateAudit()">GENERATE MUNICIPAL AUDIT</button>
+            <p class="tagline">TRUST THE SHADOWS. BUILD THE COOL.</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+    
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+
+</body>
+</html>
