@@ -12,44 +12,40 @@
         <h1>PROJECT CHHAYA</h1>
 
         <div class="module">
-            <h3>🏆 WARD RISK LEADERBOARD</h3>
+            <h3>🏆 Ward Risk Leaderboard</h3>
             <div id="leaderboard-list"></div>
         </div>
 
         <div class="module">
-            <h3>📍 THERMAL NAVIGATION</h3>
-            <input type="text" id="start-input" placeholder="Set Start Location" readonly onclick="setMode('start')">
-            <input type="text" id="end-input" placeholder="Set Destination" readonly onclick="setMode('end')">
-            <div class="slider-box">
-                <label>SUN SENSITIVITY: <span id="sens-label">50</span>%</label>
-                <input type="range" id="sens-slider" min="1" max="100" value="50" oninput="document.getElementById('sens-label').innerText=this.value">
-            </div>
-            <button class="btn-primary" onclick="getRoute()">Find Practical Path</button>
-            <div id="route-data" style="display:none; margin-top:10px;">
-                <span id="uv-score" class="savings">--</span>
-                <ul id="steps-ul"></ul>
+            <h3>📍 Route Optimization</h3>
+            <input type="text" id="start-input" placeholder="Set A" readonly onclick="setMode('start')">
+            <input type="text" id="end-input" placeholder="Set B" readonly onclick="setMode('end')">
+            <div style="margin:8px 0;"><input type="range" id="sens-slider" min="1" max="100" style="width:100%;"></div>
+            <button class="btn-primary" onclick="getBalancedRoute()">Find Coolest Path</button>
+            <div id="route-res" style="display:none; font-size:0.8rem; margin-top:10px; color:#1e8e3e;">
+                <strong>UV PROTECT: <span id="uv-val"></span></strong>
             </div>
         </div>
 
-        <div class="module sim-box">
-            <h3>🌳 TREE ROI SIMULATOR</h3>
+        <div class="module" style="background:#f1f8e9; border-color:#81c784;">
+            <h3>🌳 Tree ROI Simulator</h3>
             <select id="sim-ward" style="width:100%; padding:5px; margin-bottom:5px;">
                 <option value="Mandi Mohalla">Mandi Mohalla</option>
                 <option value="Devaraja Mohalla">Devaraja Mohalla</option>
             </select>
-            <input type="number" id="sim-count" value="200" style="width:60px;">
-            <button onclick="runSimulation()" class="btn-primary" style="background:#2e7d32;">PLANT TREES</button>
-            <div id="sim-impact" style="display:none; font-size:0.75rem; color:#1b5e20; margin-top:10px;">
-                <strong>IMPACT:</strong> <span id="res-temp"></span> | <span id="res-roi"></span>
+            <input type="number" id="sim-count" value="100" style="width:50px;">
+            <button onclick="runSimulation()" class="btn-primary" style="background:#2e7d32; width:auto;">Plant</button>
+            <div id="sim-res" style="display:none; font-size:0.7rem; margin-top:5px; color:#2e7d32;">
+                <span id="res-temp"></span> | <span id="res-roi"></span>
             </div>
         </div>
 
-        <div class="module">
-            <h3>🔍 ALBEDO FORENSIC AUDIT</h3>
-            <button class="btn-secondary" onclick="runAudit()">SCAN SURFACE ALBEDO</button>
+        <div class="module" style="background:#fffcf0; border-color:#ffe082;">
+            <h3>⚠️ Report Dead Zone</h3>
+            <div id="audit-target" style="font-size:0.7rem; margin-bottom:5px;">TARGET: VOID</div>
+            <input type="file" id="evidence-file">
+            <button class="btn-primary" style="background:#f9a825;" onclick="uploadEvidence()">Submit</button>
         </div>
-
-        <button class="btn-audit" onclick="alert('Proposal Exported to MCC.')">GENERATE MUNICIPAL AUDIT</button>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>

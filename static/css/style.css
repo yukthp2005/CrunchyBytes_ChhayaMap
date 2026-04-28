@@ -1,21 +1,19 @@
-:root { --blue: #1a73e8; --red: #d93025; --green: #1e8e3e; }
-body { margin: 0; display: flex; height: 100vh; font-family: 'Segoe UI', sans-serif; background: #f8f9fa; }
-#map { flex: 3; }
-#sidebar { flex: 1; background: white; padding: 20px; border-left: 1px solid #dadce0; display: flex; flex-direction: column; overflow-y: auto; }
+:root { --blue: #1a73e8; --red: #d93025; --gray: #70757a; }
+body { margin: 0; display: flex; height: 100vh; font-family: 'Segoe UI', sans-serif; }
+#map { flex: 3; height: 100vh; }
+#sidebar { flex: 1; background: white; padding: 20px; border-left: 1px solid #dadce0; overflow-y: auto; }
 
-h1 { color: var(--blue); font-size: 1.3rem; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
-.module { border: 1px solid #dadce0; border-radius: 8px; padding: 12px; margin-bottom: 12px; background: #fff; }
-h3 { font-size: 0.65rem; color: #70757a; text-transform: uppercase; margin-bottom: 8px; }
+h1 { color: var(--blue); font-size: 1.2rem; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+.module { border: 1px solid #dadce0; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
+h3 { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; margin-bottom: 10px; }
 
-input[type="text"], input[type="number"] { padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 5px; width: 90%; }
-.btn-primary { background: var(--blue); color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 5px; }
-.btn-secondary { background: white; border: 1px solid #ddd; padding: 8px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 0.75rem; color: #555; }
+input[type="text"] { width: 92%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; cursor: pointer; }
+.btn-primary { background: var(--blue); color: white; border: none; padding: 12px; border-radius: 4px; width: 100%; font-weight: 600; cursor: pointer; }
+.btn-secondary { background: white; border: 1px solid var(--blue); color: var(--blue); margin-top: 10px; }
 
-.ward-card { font-size: 0.8rem; margin-bottom: 8px; }
-.bar-bg { height: 5px; background: #eee; border-radius: 3px; margin-top: 3px; }
-.bar-fill { height: 100%; background: linear-gradient(to right, #fbbc04, var(--red)); border-radius: 3px; }
+.savings-box { display: flex; justify-content: space-between; margin-top: 10px; font-weight: bold; color: #1e8e3e; }
+.directions-list { font-size: 0.8rem; color: #5f6368; padding-left: 15px; margin-top: 10px; }
 
-.sim-box { background: #e8f5e9; border-color: #a5d6a7; }
-.savings { font-size: 1.4rem; font-weight: bold; color: var(--green); }
-.btn-audit { margin-top: auto; border: 1px solid var(--blue); background: #fff; color: var(--blue); padding: 10px; border-radius: 4px; cursor: pointer; }
-#steps-ul { font-size: 0.75rem; color: #666; margin-top: 5px; }
+/* Custom Marker Styling */
+.marker-a, .marker-b { background: var(--blue); color: white; border-radius: 50%; text-align: center; line-height: 24px; font-weight: bold; width: 24px!important; height: 24px!important; border: 2px solid white; }
+.marker-b { background: var(--red); }
