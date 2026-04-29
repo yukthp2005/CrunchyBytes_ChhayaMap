@@ -83,4 +83,4 @@ async function refreshHeatmap() {
 }
 
 loadLeaderboard();
-refreshHeatmap()
+refreshHeatmap();

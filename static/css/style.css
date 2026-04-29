@@ -16,4 +16,4 @@ input[type="text"] { width: 92%; padding: 10px; border: 1px solid #ddd; border-r
 
 /* Custom Marker Styling */
 .marker-a, .marker-b { background: var(--blue); color: white; border-radius: 50%; text-align: center; line-height: 24px; font-weight: bold; width: 24px!important; height: 24px!important; border: 2px solid white; }
-.marker-b { background: var(--red); 
+.marker-b { background: var(--red); }

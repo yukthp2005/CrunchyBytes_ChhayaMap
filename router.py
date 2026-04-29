@@ -51,4 +51,4 @@ def simulate_impact(ward, count):
         "temp": f"-{temp_drop:.1f}°C",
         "roi": f"₹{savings:,.0f}/mo",
         "co2": f"{count * 2}kg offset"
-    
+    }
