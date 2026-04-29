@@ -13,4 +13,4 @@ class ThermalAudit(db.Model):
         return {
             "lat": self.lat, "lng": self.lng,
             "shade": self.shade_percentage, "risk": self.risk_level
-        }
+        

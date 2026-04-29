@@ -16,4 +16,4 @@ def analyze_surface_albedo(image_path):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     albedo = round(np.mean(gray) / 255.0, 2)
     status = "HEAT TRAP" if albedo < 0.3 else "COOL SURFACE" if albedo > 0.7 else "NEUTRAL"
-    return albedo, status
+    return albedo, statu
